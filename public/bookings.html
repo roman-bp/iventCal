@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Список записей</title>
+</head>
+<body>
+    <h1>Список записей</h1>
+    <div id="bookingsList"></div>
+
+    <script>
+        fetch('http://localhost:3000/bookings')
+            .then(response => response.json())
+            .then(data => {
+                const bookingsList = document.getElementById('bookingsList');
+                data.forEach(booking => {
+                    const p = document.createElement('p');
+                    p.textContent = `Дата: ${booking.date}, Время: ${booking.time}`;
+                    bookingsList.appendChild(p);
+                });
+            })
+            .catch(error => console.error('Ошибка:', error));
+    </script>
+</body>
+</html>
